@@ -19,7 +19,7 @@ const STRINGS = {
     'trust.2.title': 'Toptan Fiyat Avantajı',
     'trust.2.desc': 'Müteahhitler, mermer atölyeleri ve toplu alım yapan iş ortakları için özel toptan fiyatlandırma.',
     'trust.3.title': 'Yurt İçi & Yurt Dışı Sevkiyat',
-    'trust.3.desc': 'Gönen’deki tesisimizden Türkiye geneline ve ihracat pazarlarına düzenli sevkiyat.',
+    'trust.3.desc': 'Türkiye geneline ve ihracat pazarlarına düzenli sevkiyat yapıyoruz.',
 
     'featured.eyebrow': 'Koleksiyon',
     'featured.title': 'Öne Çıkan Ürünler',
@@ -107,7 +107,7 @@ const STRINGS = {
     'trust.2.title': 'Wholesale Pricing',
     'trust.2.desc': 'Special wholesale rates for contractors, marble workshops and bulk-buying partners.',
     'trust.3.title': 'Domestic & International Shipping',
-    'trust.3.desc': 'Regular shipments from our Gönen facility across Türkiye and to export markets.',
+    'trust.3.desc': 'We ship regularly across Türkiye and to export markets.',
 
     'featured.eyebrow': 'Collection',
     'featured.title': 'Featured Products',
