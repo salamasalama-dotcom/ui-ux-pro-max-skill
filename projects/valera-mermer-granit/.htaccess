@@ -1,3 +1,20 @@
+# Disable directory listing
+Options -Indexes
+
+# sql/ is only needed once in the Supabase SQL Editor — it should never be
+# uploaded to the live server, but block it here too just in case.
+<IfModule mod_authz_core.c>
+  <Files ~ "\.sql$">
+    Require all denied
+  </Files>
+</IfModule>
+<IfModule !mod_authz_core.c>
+  <Files ~ "\.sql$">
+    Order allow,deny
+    Deny from all
+  </Files>
+</IfModule>
+
 # Compress text-based assets
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml
