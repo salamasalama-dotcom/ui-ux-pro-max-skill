@@ -52,6 +52,10 @@ function findProduct(slug) {
 function renderDetail() {
   const slug = new URLSearchParams(window.location.search).get('slug');
   const product = findProduct(slug) || PRODUCTS[0];
+  if (!product) {
+    window.location.href = 'urunler.html';
+    return;
+  }
   const set = (id, val) => {
     const el = document.getElementById(id);
     if (el) el.innerHTML = val;

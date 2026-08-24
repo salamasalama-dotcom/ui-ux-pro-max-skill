@@ -1,0 +1,100 @@
+body {
+  background: var(--paper-alt);
+}
+
+.admin-nav {
+  background: var(--onyx);
+  color: var(--paper);
+}
+.admin-nav a {
+  opacity: 0.7;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: opacity 0.2s ease;
+}
+.admin-nav a:hover,
+.admin-nav a.active {
+  opacity: 1;
+}
+
+.admin-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.admin-table th {
+  text-align: left;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+.admin-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+.admin-table tr:last-child td {
+  border-bottom: none;
+}
+.admin-table img.thumb {
+  width: 44px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+.badge-mermer { background: rgba(201, 162, 75, 0.15); color: var(--gold); }
+.badge-granit { background: rgba(21, 19, 15, 0.08); color: var(--ink); }
+.badge-new { background: rgba(201, 162, 75, 0.18); color: var(--gold); }
+.badge-read { background: rgba(21, 19, 15, 0.08); color: var(--ink-soft); }
+.badge-replied { background: rgba(76, 150, 90, 0.15); color: #3f7a4a; }
+
+.icon-btn {
+  font-size: 0.78rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--ink-soft);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.icon-btn:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.icon-btn-danger:hover {
+  border-color: #b3413a;
+  color: #b3413a;
+}
+
+.stat-tile {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+.stat-tile .stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+}

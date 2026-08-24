@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel — Valera Mermer Granit</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logo/favicon-32.png">
+  <link rel="stylesheet" href="../css/tailwind.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="text-[var(--ink)] antialiased">
+  <nav class="admin-nav">
+    <div class="container-wide flex items-center justify-between py-4">
+      <a href="index.html" class="font-display text-lg" style="color:var(--paper)">VALERA <span class="eyebrow-soft" style="color:rgba(245,242,236,.5)">Panel</span></a>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="active">Panel</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="talepler.html">Talepler</a>
+        <a href="../index.html" target="_blank">Siteyi Gör ↗</a>
+        <a href="#" data-logout>Çıkış</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container-wide py-10">
+    <p class="eyebrow-soft mb-1">Hoş geldiniz, <span data-admin-email></span></p>
+    <h1 class="head-2 mb-8">Panel</h1>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+      <div class="stat-tile">
+        <p class="eyebrow-soft mb-2">Bugün Ziyaret</p>
+        <p class="stat-num" id="stat-today">—</p>
+      </div>
+      <div class="stat-tile">
+        <p class="eyebrow-soft mb-2">Son 7 Gün Ziyaret</p>
+        <p class="stat-num" id="stat-week">—</p>
+      </div>
+      <div class="stat-tile">
+        <p class="eyebrow-soft mb-2">Yeni Talep</p>
+        <p class="stat-num" id="stat-leads">—</p>
+      </div>
+      <div class="stat-tile">
+        <p class="eyebrow-soft mb-2">Toplam Ürün</p>
+        <p class="stat-num" id="stat-products">—</p>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-5">
+      <a href="urunler.html" class="admin-card p-6 block hover:shadow-md transition">
+        <p class="font-display text-xl mb-1">Ürünleri Yönet</p>
+        <p class="body-md">Ekle, düzenle, sil, öne çıkar.</p>
+      </a>
+      <a href="talepler.html" class="admin-card p-6 block hover:shadow-md transition">
+        <p class="font-display text-xl mb-1">Teklif Talepleri</p>
+        <p class="body-md">İletişim formundan gelen talepleri görüntüle.</p>
+      </a>
+    </div>
+  </main>
+
+  <script src="../js/vendor/supabase.js"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="js/admin-auth.js"></script>
+  <script>
+    document.addEventListener('admin-ready', async () => {
+      const startOfToday = new Date();
+      startOfToday.setHours(0, 0, 0, 0);
+      const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+      const [today, week, leads, products] = await Promise.all([
+        supabaseClient.from('pageviews').select('id', { count: 'exact', head: true }).gte('visited_at', startOfToday.toISOString()),
+        supabaseClient.from('pageviews').select('id', { count: 'exact', head: true }).gte('visited_at', sevenDaysAgo.toISOString()),
+        supabaseClient.from('leads').select('id', { count: 'exact', head: true }).eq('status', 'new'),
+        supabaseClient.from('products').select('id', { count: 'exact', head: true }),
+      ]);
+
+      document.getElementById('stat-today').textContent = today.count ?? '0';
+      document.getElementById('stat-week').textContent = week.count ?? '0';
+      document.getElementById('stat-leads').textContent = leads.count ?? '0';
+      document.getElementById('stat-products').textContent = products.count ?? '0';
+    });
+  </script>
+</body>
+</html>

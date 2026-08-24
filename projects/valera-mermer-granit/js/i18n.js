@@ -83,6 +83,8 @@ const STRINGS = {
     'contact.form.product.other': 'Diğer / Belirtmedim',
     'contact.form.message': 'Mesajınız',
     'contact.form.submit': 'Talebi Gönder',
+    'contact.form.success.title': 'Teşekkürler!',
+    'contact.form.success.desc': 'Talebiniz alındı, en kısa sürede size dönüş yapacağız.',
     'contact.map.title': 'Showroom Konumu',
 
     'wa.defaultmsg': 'Merhaba, Valera Mermer Granit hakkında bilgi almak istiyorum.',
@@ -171,6 +173,8 @@ const STRINGS = {
     'contact.form.product.other': 'Other / Not specified',
     'contact.form.message': 'Your Message',
     'contact.form.submit': 'Send Request',
+    'contact.form.success.title': 'Thank you!',
+    'contact.form.success.desc': 'Your request has been received — we’ll get back to you shortly.',
     'contact.map.title': 'Showroom Location',
 
     'wa.defaultmsg': 'Hello, I’d like more information about Valera Mermer Granit.',

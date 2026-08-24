@@ -134,12 +134,16 @@
     </svg>
   </a>
 
-  <script src="js/products.js"></script>
+  <script src="js/vendor/supabase.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/products-remote.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/main.js"></script>
   <script src="js/render.js"></script>
+  <script src="js/analytics.js"></script>
   <script>
-    renderDetail();
+    window.PRODUCTS_READY.then(() => renderDetail());
   </script>
 </body>
 </html>

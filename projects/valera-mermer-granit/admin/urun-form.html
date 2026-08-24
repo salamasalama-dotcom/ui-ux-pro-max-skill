@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürün Düzenle — Valera Panel</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logo/favicon-32.png">
+  <link rel="stylesheet" href="../css/tailwind.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="text-[var(--ink)] antialiased">
+  <nav class="admin-nav">
+    <div class="container-wide flex items-center justify-between py-4">
+      <a href="index.html" class="font-display text-lg" style="color:var(--paper)">VALERA <span class="eyebrow-soft" style="color:rgba(245,242,236,.5)">Panel</span></a>
+      <div class="flex items-center gap-6">
+        <a href="index.html">Panel</a>
+        <a href="urunler.html" class="active">Ürünler</a>
+        <a href="talepler.html">Talepler</a>
+        <a href="../index.html" target="_blank">Siteyi Gör ↗</a>
+        <a href="#" data-logout>Çıkış</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container-wide py-10 max-w-2xl">
+    <a href="urunler.html" class="eyebrow-soft inline-flex items-center gap-2 mb-6">← Ürünler</a>
+    <h1 class="head-2 mb-8" id="form-title">Yeni Ürün</h1>
+
+    <form id="product-form" class="admin-card p-8 space-y-6">
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="field">
+          <label for="name_tr">Ürün Adı (TR)</label>
+          <input type="text" id="name_tr" required>
+        </div>
+        <div class="field">
+          <label for="name_en">Ürün Adı (EN)</label>
+          <input type="text" id="name_en" required>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <div class="field">
+          <label for="type">Tür</label>
+          <select id="type" required>
+            <option value="mermer">Mermer</option>
+            <option value="granit">Granit</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="origin">Menşei</label>
+          <input type="text" id="origin" placeholder="Örn. Afyon, Türkiye">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="description_tr">Açıklama (TR)</label>
+        <textarea id="description_tr" rows="3"></textarea>
+      </div>
+      <div class="field">
+        <label for="description_en">Açıklama (EN)</label>
+        <textarea id="description_en" rows="3"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="image_file">Ürün Görseli</label>
+        <img id="image-preview" class="thumb mb-3 hidden" style="width:100px;height:125px" alt="">
+        <input type="file" id="image_file" accept="image/jpeg,image/png,image/webp">
+        <p class="eyebrow-soft mt-2">Boş bırakırsanız mevcut görsel korunur. Önerilen oran: dikey (4:5).</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6 items-center">
+        <label class="flex items-center gap-2 body-md">
+          <input type="checkbox" id="featured"> Ana sayfada öne çıkar
+        </label>
+        <div class="field">
+          <label for="sort_order">Sıra</label>
+          <input type="number" id="sort_order" value="0">
+        </div>
+      </div>
+
+      <p id="form-error" class="text-sm hidden" style="color:#b3413a"></p>
+
+      <div class="flex gap-3">
+        <button type="submit" class="btn btn-primary" id="submit-btn">Kaydet</button>
+        <a href="urunler.html" class="btn btn-outline-dark">Vazgeç</a>
+      </div>
+    </form>
+  </main>
+
+  <script src="../js/vendor/supabase.js"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="js/admin-auth.js"></script>
+  <script>
+    const productId = new URLSearchParams(location.search).get('id');
+    let currentImage = '';
+
+    async function loadExisting() {
+      if (!productId) return;
+      document.getElementById('form-title').textContent = 'Ürünü Düzenle';
+      const { data, error } = await supabaseClient.from('products').select('*').eq('id', productId).single();
+      if (error || !data) {
+        document.getElementById('form-error').textContent = 'Ürün bulunamadı.';
+        document.getElementById('form-error').classList.remove('hidden');
+        return;
+      }
+      document.getElementById('name_tr').value = data.name_tr;
+      document.getElementById('name_en').value = data.name_en;
+      document.getElementById('type').value = data.type;
+      document.getElementById('origin').value = data.origin || '';
+      document.getElementById('description_tr').value = data.description_tr || '';
+      document.getElementById('description_en').value = data.description_en || '';
+      document.getElementById('featured').checked = !!data.featured;
+      document.getElementById('sort_order').value = data.sort_order || 0;
+      currentImage = data.image;
+      const preview = document.getElementById('image-preview');
+      preview.src = currentImage;
+      preview.classList.remove('hidden');
+    }
+
+    document.getElementById('image_file').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const preview = document.getElementById('image-preview');
+      preview.src = URL.createObjectURL(file);
+      preview.classList.remove('hidden');
+    });
+
+    document.getElementById('product-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submit-btn');
+      const errorEl = document.getElementById('form-error');
+      errorEl.classList.add('hidden');
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Kaydediliyor...';
+
+      try {
+        const name_tr = document.getElementById('name_tr').value.trim();
+        const payload = {
+          name_tr,
+          name_en: document.getElementById('name_en').value.trim(),
+          type: document.getElementById('type').value,
+          origin: document.getElementById('origin').value.trim(),
+          description_tr: document.getElementById('description_tr').value.trim(),
+          description_en: document.getElementById('description_en').value.trim(),
+          featured: document.getElementById('featured').checked,
+          sort_order: parseInt(document.getElementById('sort_order').value, 10) || 0,
+        };
+
+        const file = document.getElementById('image_file').files[0];
+        if (file) {
+          const ext = file.name.split('.').pop();
+          const path = `${slugify(name_tr)}-${Date.now()}.${ext}`;
+          const { error: upErr } = await supabaseClient.storage.from('urun-gorselleri').upload(path, file, { upsert: false });
+          if (upErr) throw upErr;
+          const { data: pub } = supabaseClient.storage.from('urun-gorselleri').getPublicUrl(path);
+          payload.image = pub.publicUrl;
+        } else if (currentImage) {
+          payload.image = currentImage;
+        } else {
+          throw new Error('Lütfen bir görsel seçin.');
+        }
+
+        if (productId) {
+          const { error: updErr } = await supabaseClient.from('products').update(payload).eq('id', productId);
+          if (updErr) throw updErr;
+        } else {
+          payload.slug = slugify(name_tr) + '-' + Math.random().toString(36).slice(2, 6);
+          const { error: insErr } = await supabaseClient.from('products').insert(payload);
+          if (insErr) throw insErr;
+        }
+
+        window.location.href = 'urunler.html';
+      } catch (err) {
+        errorEl.textContent = err.message || 'Bir hata oluştu.';
+        errorEl.classList.remove('hidden');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Kaydet';
+      }
+    });
+
+    document.addEventListener('admin-ready', loadExisting);
+  </script>
+</body>
+</html>

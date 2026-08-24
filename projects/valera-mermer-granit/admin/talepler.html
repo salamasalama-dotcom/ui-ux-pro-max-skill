@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Talepler — Valera Panel</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logo/favicon-32.png">
+  <link rel="stylesheet" href="../css/tailwind.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="text-[var(--ink)] antialiased">
+  <nav class="admin-nav">
+    <div class="container-wide flex items-center justify-between py-4">
+      <a href="index.html" class="font-display text-lg" style="color:var(--paper)">VALERA <span class="eyebrow-soft" style="color:rgba(245,242,236,.5)">Panel</span></a>
+      <div class="flex items-center gap-6">
+        <a href="index.html">Panel</a>
+        <a href="urunler.html">Ürünler</a>
+        <a href="talepler.html" class="active">Talepler</a>
+        <a href="../index.html" target="_blank">Siteyi Gör ↗</a>
+        <a href="#" data-logout>Çıkış</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container-wide py-10">
+    <h1 class="head-2 mb-8">Teklif Talepleri</h1>
+
+    <div class="admin-card overflow-x-auto">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Tarih</th>
+            <th>Ad Soyad</th>
+            <th>İletişim</th>
+            <th>Ürün</th>
+            <th>Mesaj</th>
+            <th>Durum</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="leads-tbody">
+          <tr><td colspan="7" class="text-center py-8 body-md">Yükleniyor...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../js/vendor/supabase.js"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="js/admin-auth.js"></script>
+  <script>
+    const statusLabel = { new: 'Yeni', read: 'Okundu', replied: 'Yanıtlandı' };
+
+    async function loadLeads() {
+      const tbody = document.getElementById('leads-tbody');
+      const { data, error } = await supabaseClient.from('leads').select('*').order('created_at', { ascending: false });
+      if (error) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-8" style="color:#b3413a">Yüklenemedi: ${escapeHtml(error.message)}</td></tr>`;
+        return;
+      }
+      if (!data.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8 body-md">Henüz talep yok.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = data.map((l) => `
+        <tr>
+          <td class="whitespace-nowrap">${new Date(l.created_at).toLocaleString('tr-TR', { dateStyle: 'short', timeStyle: 'short' })}</td>
+          <td>${escapeHtml(l.name || '—')}</td>
+          <td>
+            <p>${escapeHtml(l.phone || '')}</p>
+            <p class="eyebrow-soft">${escapeHtml(l.email || '')}</p>
+          </td>
+          <td>${escapeHtml(l.product_interest || '—')}</td>
+          <td class="max-w-xs">${escapeHtml(l.message || '—')}</td>
+          <td><span class="badge badge-${l.status}">${statusLabel[l.status] || l.status}</span></td>
+          <td class="whitespace-nowrap">
+            ${l.status !== 'read' ? `<button class="icon-btn" data-status="${l.id}" data-value="read">Okundu İşaretle</button>` : ''}
+            ${l.status !== 'replied' ? `<button class="icon-btn" data-status="${l.id}" data-value="replied">Yanıtlandı</button>` : ''}
+          </td>
+        </tr>
+      `).join('');
+
+      tbody.querySelectorAll('[data-status]').forEach((el) => {
+        el.addEventListener('click', async () => {
+          const id = el.getAttribute('data-status');
+          const value = el.getAttribute('data-value');
+          const { error: updErr } = await supabaseClient.from('leads').update({ status: value }).eq('id', id);
+          if (updErr) {
+            alert('Güncellenemedi: ' + updErr.message);
+            return;
+          }
+          loadLeads();
+        });
+      });
+    }
+
+    document.addEventListener('admin-ready', loadLeads);
+  </script>
+</body>
+</html>
