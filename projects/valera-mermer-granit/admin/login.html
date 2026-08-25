@@ -9,15 +9,14 @@
   <link rel="stylesheet" href="../css/tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap">
   <link rel="stylesheet" href="css/admin.css">
 </head>
-<body class="bg-[var(--paper-alt)] text-[var(--ink)] antialiased">
-  <div class="min-h-screen flex items-center justify-center p-6">
-    <div class="admin-card w-full max-w-sm p-8">
+<body class="antialiased">
+  <div class="login-shell">
+    <div class="login-card">
       <img src="../assets/logo/valera-logo-black.png" alt="Valera" class="h-8 w-auto mb-8 mx-auto">
-      <p class="eyebrow text-center mb-6">Yönetim Paneli</p>
+      <p style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;text-align:center;opacity:.6;margin:0 0 24px;">Yönetim Paneli</p>
       <form id="login-form" class="space-y-5">
         <div class="field">
           <label for="email">E-posta</label>
@@ -27,7 +26,7 @@
           <label for="password">Şifre</label>
           <input type="password" id="password" required autocomplete="current-password">
         </div>
-        <p id="login-error" class="text-sm hidden" style="color:#b3413a"></p>
+        <p id="login-error" class="text-sm hidden" style="color:var(--a-accent)"></p>
         <button type="submit" class="btn btn-primary w-full">Giriş Yap</button>
       </form>
     </div>

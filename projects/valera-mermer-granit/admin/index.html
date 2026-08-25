@@ -9,55 +9,52 @@
   <link rel="stylesheet" href="../css/tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap">
   <link rel="stylesheet" href="css/admin.css">
 </head>
-<body class="text-[var(--ink)] antialiased">
+<body class="antialiased">
   <nav class="admin-nav">
-    <div class="container-wide flex items-center justify-between py-4">
-      <a href="index.html" class="font-display text-lg" style="color:var(--paper)">VALERA <span class="eyebrow-soft" style="color:rgba(245,242,236,.5)">Panel</span></a>
-      <div class="flex items-center gap-6">
-        <a href="index.html" class="active">Panel</a>
-        <a href="urunler.html">Ürünler</a>
-        <a href="talepler.html">Talepler</a>
-        <a href="../index.html" target="_blank">Siteyi Gör ↗</a>
-        <a href="#" data-logout>Çıkış</a>
-      </div>
+    <a href="index.html" class="nav-brand">VALERA <span>Panel</span></a>
+    <a href="index.html" class="active">Panel</a>
+    <a href="urunler.html">Ürünler</a>
+    <a href="talepler.html">Talepler</a>
+    <div class="nav-actions">
+      <a href="../index.html" target="_blank" class="btn btn-ghost btn-sm">Siteyi Gör ↗</a>
+      <a href="#" data-logout class="btn btn-secondary btn-sm">Çıkış</a>
     </div>
   </nav>
 
-  <main class="container-wide py-10">
-    <p class="eyebrow-soft mb-1">Hoş geldiniz, <span data-admin-email></span></p>
-    <h1 class="head-2 mb-8">Panel</h1>
+  <main class="admin-main">
+    <p style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.55;margin:0 0 8px;">Hoş geldiniz, <span data-admin-email></span></p>
+    <h1 style="font-size:36px;margin:0 0 24px;">Panel</h1>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
       <div class="stat-tile">
-        <p class="eyebrow-soft mb-2">Bugün Ziyaret</p>
+        <p class="card-kicker">Bugün Ziyaret</p>
         <p class="stat-num" id="stat-today">—</p>
       </div>
       <div class="stat-tile">
-        <p class="eyebrow-soft mb-2">Son 7 Gün Ziyaret</p>
+        <p class="card-kicker">Son 7 Gün Ziyaret</p>
         <p class="stat-num" id="stat-week">—</p>
       </div>
       <div class="stat-tile">
-        <p class="eyebrow-soft mb-2">Yeni Talep</p>
+        <p class="card-kicker">Yeni Talep</p>
         <p class="stat-num" id="stat-leads">—</p>
       </div>
       <div class="stat-tile">
-        <p class="eyebrow-soft mb-2">Toplam Ürün</p>
+        <p class="card-kicker">Toplam Ürün</p>
         <p class="stat-num" id="stat-products">—</p>
       </div>
     </div>
 
-    <div class="grid sm:grid-cols-2 gap-5">
-      <a href="urunler.html" class="admin-card p-6 block hover:shadow-md transition">
-        <p class="font-display text-xl mb-1">Ürünleri Yönet</p>
-        <p class="body-md">Ekle, düzenle, sil, öne çıkar.</p>
+    <div class="grid sm:grid-cols-2 gap-3">
+      <a href="urunler.html" class="action-card">
+        <p class="card-title">Ürünleri Yönet</p>
+        <p class="card-body">Ekle, düzenle, sil, öne çıkar.</p>
       </a>
-      <a href="talepler.html" class="admin-card p-6 block hover:shadow-md transition">
-        <p class="font-display text-xl mb-1">Teklif Talepleri</p>
-        <p class="body-md">İletişim formundan gelen talepleri görüntüle.</p>
+      <a href="talepler.html" class="action-card">
+        <p class="card-title">Teklif Talepleri</p>
+        <p class="card-body">İletişim formundan gelen talepleri görüntüle.</p>
       </a>
     </div>
   </main>

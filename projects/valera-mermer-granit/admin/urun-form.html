@@ -9,29 +9,26 @@
   <link rel="stylesheet" href="../css/tailwind.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap">
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap">
   <link rel="stylesheet" href="css/admin.css">
 </head>
-<body class="text-[var(--ink)] antialiased">
+<body class="antialiased">
   <nav class="admin-nav">
-    <div class="container-wide flex items-center justify-between py-4">
-      <a href="index.html" class="font-display text-lg" style="color:var(--paper)">VALERA <span class="eyebrow-soft" style="color:rgba(245,242,236,.5)">Panel</span></a>
-      <div class="flex items-center gap-6">
-        <a href="index.html">Panel</a>
-        <a href="urunler.html" class="active">Ürünler</a>
-        <a href="talepler.html">Talepler</a>
-        <a href="../index.html" target="_blank">Siteyi Gör ↗</a>
-        <a href="#" data-logout>Çıkış</a>
-      </div>
+    <a href="index.html" class="nav-brand">VALERA <span>Panel</span></a>
+    <a href="index.html">Panel</a>
+    <a href="urunler.html" class="active">Ürünler</a>
+    <a href="talepler.html">Talepler</a>
+    <div class="nav-actions">
+      <a href="../index.html" target="_blank" class="btn btn-ghost btn-sm">Siteyi Gör ↗</a>
+      <a href="#" data-logout class="btn btn-secondary btn-sm">Çıkış</a>
     </div>
   </nav>
 
-  <main class="container-wide py-10 max-w-2xl">
-    <a href="urunler.html" class="eyebrow-soft inline-flex items-center gap-2 mb-6">← Ürünler</a>
-    <h1 class="head-2 mb-8" id="form-title">Yeni Ürün</h1>
+  <main class="admin-main" style="max-width:760px;">
+    <a href="urunler.html" style="display:inline-flex;align-items:center;gap:6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:inherit;opacity:.7;margin-bottom:16px;">← Ürünler</a>
+    <h1 style="font-size:36px;margin:0 0 20px;" id="form-title">Yeni Ürün</h1>
 
-    <form id="product-form" class="admin-card p-8 space-y-6">
+    <form id="product-form" class="admin-card elev-sm card-pad space-y-6">
       <div class="grid sm:grid-cols-2 gap-6">
         <div class="field">
           <label for="name_tr">Ürün Adı (TR)</label>
@@ -70,11 +67,11 @@
         <label for="image_file">Ürün Görseli</label>
         <img id="image-preview" class="thumb mb-3 hidden" style="width:100px;height:125px" alt="">
         <input type="file" id="image_file" accept="image/jpeg,image/png,image/webp">
-        <p class="eyebrow-soft mt-2">Boş bırakırsanız mevcut görsel korunur. Önerilen oran: dikey (4:5).</p>
+        <p style="font-size:12px;opacity:.6;margin-top:8px;">Boş bırakırsanız mevcut görsel korunur. Önerilen oran: dikey (4:5).</p>
       </div>
 
       <div class="grid sm:grid-cols-2 gap-6 items-center">
-        <label class="flex items-center gap-2 body-md">
+        <label class="check-label">
           <input type="checkbox" id="featured"> Ana sayfada öne çıkar
         </label>
         <div class="field">
@@ -83,11 +80,11 @@
         </div>
       </div>
 
-      <p id="form-error" class="text-sm hidden" style="color:#b3413a"></p>
+      <p id="form-error" class="text-sm hidden" style="color:var(--a-accent-700)"></p>
 
       <div class="flex gap-3">
         <button type="submit" class="btn btn-primary" id="submit-btn">Kaydet</button>
-        <a href="urunler.html" class="btn btn-outline-dark">Vazgeç</a>
+        <a href="urunler.html" class="btn btn-secondary">Vazgeç</a>
       </div>
     </form>
   </main>
