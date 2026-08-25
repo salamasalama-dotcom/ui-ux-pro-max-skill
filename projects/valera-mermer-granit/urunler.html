@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürünler — Valera Mermer Granit</title>
+  <meta name="description" content="Valera Mermer Granit ürün kataloğu: doğal mermer ve granit çeşitleri, menşei ve WhatsApp üzerinden anında teklif alma.">
+  <link rel="icon" href="assets/logo/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+  <link rel="stylesheet" href="css/tailwind.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;900&family=Jost:wght@300;400;500;600&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[var(--paper)] text-[var(--ink)] antialiased">
+
+  <header id="site-header" class="is-solid">
+    <div class="container-wide flex items-center justify-between py-4 md:py-5">
+      <a href="index.html" class="flex items-center gap-2 shrink-0">
+        <img src="assets/logo/valera-logo-black.png" alt="Valera" class="logo-on-light h-7 md:h-8 w-auto">
+        <img src="assets/logo/valera-logo-white.png" alt="Valera" class="logo-on-dark h-7 md:h-8 w-auto">
+      </a>
+      <nav class="hidden md:flex items-center gap-9">
+        <a href="index.html" class="nav-link" data-i18n="nav.home">Ana Sayfa</a>
+        <a href="urunler.html" class="nav-link active" data-i18n="nav.products">Ürünler</a>
+        <a href="projeler.html" class="nav-link" data-i18n="nav.projects">Projeler</a>
+        <a href="iletisim.html" class="nav-link" data-i18n="nav.contact">İletişim</a>
+      </nav>
+      <div class="flex items-center gap-5">
+        <div class="lang-toggle hidden sm:flex items-center gap-2">
+          <button data-lang="tr">TR</button>
+          <span style="opacity:.3">/</span>
+          <button data-lang="en">EN</button>
+        </div>
+        <a data-wa href="#" class="btn btn-primary btn-sm hidden sm:inline-flex" data-i18n="nav.quote">Teklif Al</a>
+        <button id="menu-toggle" aria-label="Menu" aria-expanded="false" class="md:hidden w-9 h-9 flex flex-col justify-center gap-1.5">
+          <span class="block h-px w-6 bg-current"></span>
+          <span class="block h-px w-6 bg-current"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div id="mobile-menu" class="fixed inset-0 z-[95] bg-[var(--paper)] md:hidden">
+    <div class="container-wide pt-28 pb-10 flex flex-col gap-7 h-full">
+      <a href="index.html" class="head-2" data-i18n="nav.home">Ana Sayfa</a>
+      <a href="urunler.html" class="head-2" data-i18n="nav.products">Ürünler</a>
+      <a href="projeler.html" class="head-2" data-i18n="nav.projects">Projeler</a>
+      <a href="iletisim.html" class="head-2" data-i18n="nav.contact">İletişim</a>
+      <div class="lang-toggle flex items-center gap-4 mt-2">
+        <button data-lang="tr" class="eyebrow">TR</button>
+        <button data-lang="en" class="eyebrow">EN</button>
+      </div>
+      <a data-wa href="#" class="btn btn-primary mt-auto w-full" data-i18n="nav.quote">Teklif Al</a>
+    </div>
+  </div>
+
+  <main>
+    <section class="pt-36 pb-12 md:pt-44 md:pb-16">
+      <div class="container-wide">
+        <p class="eyebrow mb-4 reveal" data-i18n="products.eyebrow">Katalog</p>
+        <h1 class="head-1 max-w-2xl reveal reveal-delay-1" data-i18n="products.title">Ürünler</h1>
+        <p class="body-lg max-w-xl mt-5 reveal reveal-delay-2" data-i18n="products.subtitle">Ocaktan çıkan doğal mermer ve granitlerimizin tam koleksiyonu. Bir ürün seçin, saniyeler içinde WhatsApp üzerinden teklif alın.</p>
+      </div>
+    </section>
+
+    <section class="pb-8">
+      <div class="container-wide flex flex-wrap gap-3 reveal">
+        <button class="filter-tab active" data-filter="all" data-i18n="filter.all">Tümü</button>
+        <button class="filter-tab" data-filter="mermer" data-i18n="filter.marble">Mermer</button>
+        <button class="filter-tab" data-filter="granit" data-i18n="filter.granite">Granit</button>
+      </div>
+    </section>
+
+    <section class="section pt-4">
+      <div class="container-wide">
+        <div id="catalog-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+      </div>
+    </section>
+
+    <section class="relative overflow-hidden py-24 md:py-32" style="background:var(--onyx); color:var(--paper)">
+      <div class="spotlight"></div>
+      <div class="container-wide relative text-center reveal">
+        <h2 class="head-1 max-w-2xl mx-auto" data-i18n="ctaband.title">Projeniz için doğru taşı birlikte bulalım</h2>
+        <p class="body-lg mt-5 max-w-lg mx-auto" style="color:rgba(245,242,236,.7)" data-i18n="ctaband.subtitle">Numune, ölçü ve fiyat teklifi için bize doğrudan ulaşın.</p>
+        <div class="flex flex-wrap justify-center gap-4 mt-10">
+          <a data-wa href="#" target="_blank" rel="noopener noreferrer" class="btn btn-gold" data-i18n="ctaband.whatsapp">WhatsApp’tan Yazın</a>
+          <a href="iletisim.html" class="btn btn-outline" data-i18n="ctaband.contact">İletişim Formu</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="background:var(--onyx); color:var(--paper)" class="pt-16 pb-8">
+    <div class="container-wide grid gap-12 md:grid-cols-[1.3fr_1fr_1fr] pb-14 border-b hairline-dark">
+      <div>
+        <img src="assets/logo/valera-logo-gold.png" alt="Valera" class="h-9 w-auto mb-5">
+        <p class="body-md max-w-sm" style="color:rgba(245,242,236,.6)" data-i18n="footer.tagline">Balıkesir Gönen’den, ocaktan sofraya doğal taşın zarafeti.</p>
+      </div>
+      <div>
+        <p class="eyebrow mb-5" data-i18n="footer.sitemap">Site Haritası</p>
+        <ul class="flex flex-col gap-3 body-md" style="color:rgba(245,242,236,.7)">
+          <li><a href="index.html" data-i18n="nav.home">Ana Sayfa</a></li>
+          <li><a href="urunler.html" data-i18n="nav.products">Ürünler</a></li>
+          <li><a href="projeler.html" data-i18n="nav.projects">Projeler</a></li>
+          <li><a href="iletisim.html" data-i18n="nav.contact">İletişim</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow mb-5" data-i18n="footer.contact">İletişim</p>
+        <ul class="flex flex-col gap-3 body-md" style="color:rgba(245,242,236,.7)">
+          <li><a data-phone-href data-phone-text href="#"></a></li>
+          <li><a data-email-href data-email-text href="#"></a></li>
+          <li data-address-text></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-wide pt-6 flex flex-col sm:flex-row justify-between gap-2 eyebrow-soft" style="color:rgba(245,242,236,.4)">
+      <p>&copy; <span data-year></span> VALERA MERMER GRANİT — <span data-i18n="footer.rights">Tüm hakları saklıdır.</span></p>
+      <p>Gönen, Balıkesir, Türkiye</p>
+    </div>
+  </footer>
+
+  <a id="wa-float" data-wa href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.23.61 4.32 1.68 6.12L4 29l8.06-1.62a11.98 11.98 0 0 0 3.96.67c6.62 0 12.02-5.4 12.02-12.03C28.04 8.4 22.64 3 16.02 3Zm0 21.83a9.7 9.7 0 0 1-4.95-1.36l-.35-.21-4.78.96.98-4.66-.23-.36a9.7 9.7 0 0 1-1.5-5.18c0-5.37 4.37-9.74 9.83-9.74 5.46 0 9.83 4.37 9.83 9.74 0 5.37-4.37 9.81-9.83 9.81Zm5.4-7.34c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.3-1.03 1-1.03 2.45 0 1.44 1.06 2.84 1.2 3.04.15.2 2.09 3.2 5.07 4.48.71.31 1.26.49 1.69.63.71.22 1.35.19 1.86.12.57-.09 1.75-.71 2-1.4.25-.68.25-1.27.17-1.4-.07-.13-.27-.2-.57-.35Z" fill="#0b0c0e"/>
+    </svg>
+  </a>
+
+  <script src="js/vendor/supabase.js"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/products-remote.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/analytics.js"></script>
+  <script>
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      const initial = params.get('type') === 'granit' ? 'granit' : params.get('type') === 'mermer' ? 'mermer' : 'all';
+      const tabs = document.querySelectorAll('.filter-tab');
+      tabs.forEach((tab) => {
+        tab.classList.toggle('active', tab.getAttribute('data-filter') === initial);
+        tab.addEventListener('click', () => {
+          tabs.forEach((t) => t.classList.remove('active'));
+          tab.classList.add('active');
+          renderCatalog(tab.getAttribute('data-filter'));
+        });
+      });
+      window.PRODUCTS_READY.then(() => renderCatalog(initial));
+    })();
+  </script>
+</body>
+</html>

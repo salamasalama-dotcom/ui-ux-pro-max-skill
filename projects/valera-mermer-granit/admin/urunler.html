@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ürünler — Valera Panel</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="../assets/logo/favicon-32.png">
+  <link rel="stylesheet" href="../css/tailwind.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800&display=swap">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="antialiased">
+  <nav class="admin-nav">
+    <a href="index.html" class="nav-brand">VALERA <span>Panel</span></a>
+    <a href="index.html">Panel</a>
+    <a href="urunler.html" class="active">Ürünler</a>
+    <a href="talepler.html">Talepler</a>
+    <div class="nav-actions">
+      <a href="../index.html" target="_blank" class="btn btn-ghost btn-sm">Siteyi Gör ↗</a>
+      <a href="#" data-logout class="btn btn-secondary btn-sm">Çıkış</a>
+    </div>
+  </nav>
+
+  <main class="admin-main">
+    <div class="flex items-center justify-between mb-5">
+      <h1 style="font-size:36px;margin:0;">Ürünler</h1>
+      <a href="urun-form.html" class="btn btn-primary">+ Yeni Ürün</a>
+    </div>
+
+    <div class="admin-card overflow-x-auto">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Ad</th>
+            <th>Tür</th>
+            <th>Menşei</th>
+            <th>Öne Çıkan</th>
+            <th>Sıra</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="products-tbody">
+          <tr><td colspan="7" class="text-center py-8" style="opacity:.6">Yükleniyor...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="../js/vendor/supabase.js"></script>
+  <script src="../js/supabase-config.js"></script>
+  <script src="../js/supabase-client.js"></script>
+  <script src="js/admin-auth.js"></script>
+  <script>
+    async function loadProducts() {
+      const tbody = document.getElementById('products-tbody');
+      const { data, error } = await supabaseClient.from('products').select('*').order('sort_order', { ascending: true });
+      if (error) {
+        tbody.innerHTML = `<tr><td colspan="7" class="text-center py-8" style="color:var(--a-accent-700)">Yüklenemedi: ${escapeHtml(error.message)}</td></tr>`;
+        return;
+      }
+      if (!data.length) {
+        tbody.innerHTML = '<tr><td colspan="7" class="text-center py-8" style="opacity:.6">Henüz ürün yok.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = data.map((p) => `
+        <tr>
+          <td><img class="thumb" src="${escapeHtml(p.image)}" alt=""></td>
+          <td>
+            <p style="font-weight:600">${escapeHtml(p.name_tr)}</p>
+            <p style="font-size:12px;opacity:.6">${escapeHtml(p.name_en)}</p>
+          </td>
+          <td><span class="tag tag-neutral">${p.type === 'granit' ? 'Granit' : 'Mermer'}</span></td>
+          <td>${escapeHtml(p.origin || '—')}</td>
+          <td>
+            <input type="checkbox" data-featured-toggle="${p.id}" ${p.featured ? 'checked' : ''}>
+          </td>
+          <td>${p.sort_order}</td>
+          <td class="text-right whitespace-nowrap">
+            <a href="urun-form.html?id=${p.id}" class="btn btn-ghost btn-sm">Düzenle</a>
+            <button class="btn btn-ghost btn-sm" style="color:var(--a-accent-700)" data-delete="${p.id}" data-name="${escapeHtml(p.name_tr)}">Sil</button>
+          </td>
+        </tr>
+      `).join('');
+
+      tbody.querySelectorAll('[data-featured-toggle]').forEach((el) => {
+        el.addEventListener('change', async () => {
+          const id = el.getAttribute('data-featured-toggle');
+          const { error: updErr } = await supabaseClient.from('products').update({ featured: el.checked }).eq('id', id);
+          if (updErr) {
+            alert('Güncellenemedi: ' + updErr.message);
+            el.checked = !el.checked;
+          }
+        });
+      });
+
+      tbody.querySelectorAll('[data-delete]').forEach((el) => {
+        el.addEventListener('click', async () => {
+          const id = el.getAttribute('data-delete');
+          const name = el.getAttribute('data-name');
+          if (!confirm(`"${name}" ürünü silinsin mi? Bu işlem geri alınamaz.`)) return;
+          const { error: delErr } = await supabaseClient.from('products').delete().eq('id', id);
+          if (delErr) {
+            alert('Silinemedi: ' + delErr.message);
+            return;
+          }
+          loadProducts();
+        });
+      });
+    }
+
+    document.addEventListener('admin-ready', loadProducts);
+  </script>
+</body>
+</html>
