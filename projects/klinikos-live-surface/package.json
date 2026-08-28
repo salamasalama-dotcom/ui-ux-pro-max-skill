@@ -1,0 +1,15 @@
+{
+  "name": "klinikos-live-surface",
+  "private": true,
+  "description": "Klinik.OS live surface: static scroll-driven site plus its verification harness.",
+  "scripts": {
+    "serve": "node tooling/serve.mjs --root . --port 4512",
+    "verify": "node tooling/shoot.mjs --url http://localhost:4512 --out lab/desktop",
+    "verify:mobile": "node tooling/shoot.mjs --url http://localhost:4512 --out lab/mobile --width 390 --height 844",
+    "verify:reduced": "node tooling/shoot.mjs --url http://localhost:4512 --out lab/reduced --reduced-motion",
+    "verify:interact": "node tooling/interact.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.62.1"
+  }
+}

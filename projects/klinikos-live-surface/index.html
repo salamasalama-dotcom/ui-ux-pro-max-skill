@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Klinik.OS · kliniğin idari yükünü üstlenen işletim sistemi</title>
+<meta name="description" content="Klinik.OS randevuyu, hasta iletişimini, otomasyonu ve yönetim raporunu tek konsolda toplar. Bu sayfa bir klinik gününü baştan sona canlandırır.">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="Klinik.OS">
+<meta property="og:description" content="Kliniğin idari yükünü üstlenen işletim sistemi. Bir klinik gününü kaydırarak izleyin.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%23060A12'/><rect x='14.5' y='8' width='3' height='16' rx='1' fill='%234C7CFF'/><rect x='8' y='14.5' width='16' height='3' rx='1' fill='%234C7CFF'/></svg>">
+<link rel="stylesheet" href="scrollcraft.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<a class="k-skip" href="#act-gelen">İçeriğe geç</a>
+<div class="sc-grain" aria-hidden="true"></div>
+<div class="k-marks" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+
+<!-- ===================================================== app chrome ===== -->
+<header class="k-status">
+  <span class="k-status__mark"><b>Klinik<span>.</span>OS</b></span>
+  <span class="k-status__sub">Meridyen Polikliniği · Kadıköy</span>
+  <span class="k-status__spacer"></span>
+  <span class="k-demo">Demo verisi</span>
+  <span class="k-status__clock"><span>Perşembe</span><b>08:05</b></span>
+</header>
+
+<nav class="k-side" aria-label="Modüller">
+  <div class="k-side__lede">
+    <h1>Klinik.OS, kliniğin idari yükünü üstlenen işletim sistemidir.</h1>
+    <p>Randevu, hasta iletişimi, otomasyon ve yönetim raporu tek konsolda.</p>
+  </div>
+  <p class="k-side__head">Modüller</p>
+  <div class="k-nav"></div>
+  <p class="k-side__head">Bugün</p>
+  <dl class="k-now">
+    <div><dt>Planlanan</dt><dd id="now-planned" class="sc-nums">0</dd></div>
+    <div><dt>Gelen</dt><dd id="now-arrived" class="sc-nums">0</dd></div>
+    <div><dt>Gelmeyen</dt><dd id="now-missed" class="sc-nums">0</dd></div>
+  </dl>
+  <div class="k-side__foot">
+    <p>Aşağısı bir klinik günüdür. Kaydırdıkça saat ilerler.</p>
+    <a class="k-btn" href="#act-kurulum">Kurulumu başlat</a>
+  </div>
+</nav>
+
+<!-- The day rail. Scroll position is clinic time; this rail is that clock,
+     it is draggable, and it keeps every event it passes. -->
+<aside class="k-rail" aria-label="Gün çizelgesi">
+  <p class="k-rail__cap">Gün</p>
+  <div class="k-rail__track" role="slider" tabindex="0"
+       aria-label="Klinik saati. Sürükleyin veya ok tuşlarını kullanın."
+       aria-valuemin="480" aria-valuemax="1140" aria-valuenow="485" aria-valuetext="08:05">
+    <div class="k-rail__hand" aria-hidden="true"><b>08:05</b></div>
+  </div>
+  <p class="k-rail__foot"><span class="k-rail__count">0</span> kayıt</p>
+</aside>
+
+<main>
+
+  <!-- 1 · GELEN KUTUSU. The surface is already in a state when the page lands. -->
+  <section id="act-gelen" data-sc-act="pin" data-sc-span="2.4" aria-labelledby="h-gelen">
+    <div data-sc-stage>
+      <div class="k-frame k-frame--center">
+        <div class="k-inbox">
+
+          <section class="k-panel k-thread" aria-labelledby="h-gelen">
+            <div class="k-panel__bar">
+              <h2 id="h-gelen">Gelen kutusu · Zeynep Arslan</h2>
+              <span class="k-meta k-meta--live">0 mesaj</span>
+            </div>
+            <div class="k-panel__body"></div>
+            <p class="k-panel__foot">WhatsApp · bugün 3 konuşma · yanıtları asistan yazdı</p>
+          </section>
+
+          <section class="k-panel k-src" aria-labelledby="h-kaynak">
+            <div class="k-panel__bar">
+              <h2 id="h-kaynak">Yanıtın dayandığı kayıt</h2>
+            </div>
+            <div class="k-panel__body"></div>
+            <p class="k-panel__foot">Asistan yalnızca kliniğin kendi kayıtlarından yanıt verir.</p>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · YETKİ KATMANI. Two real traces of the same pipeline. -->
+  <section id="act-yetki" data-sc-act="flow" class="sc-section k-after-pin" aria-labelledby="h-yetki">
+    <div class="k-band">
+      <div data-sc-in data-sc-stagger="60">
+        <h2 class="k-h" id="h-yetki">Yapay zekâ kaydı kendi başına değiştirmez.</h2>
+        <p class="k-sub">Her istek aynı boru hattından geçer: araç çağrısı, izin kontrolü, deterministik akış, veritabanı, denetim kaydı. İzin yoksa akış hiç çalışmaz. Aşağıdaki iki iz, bugünün kayıtlarından.</p>
+      </div>
+
+      <div class="k-panel" data-sc-reveal="up" data-sc-reveal-at="0.14 0.5">
+        <div class="k-panel__bar">
+          <h3>Denetim izi</h3>
+          <div class="k-tabs" role="tablist" aria-label="İz seçimi"></div>
+          <span class="k-meta" id="trace-caption"></span>
+        </div>
+        <div class="k-panel__body">
+          <ul class="k-trace" id="trace-panel" role="tabpanel" aria-labelledby="tab-allow"></ul>
+        </div>
+        <p class="k-panel__foot">Her satır denetim kaydına aynen yazılır. Yapay zekâ işlemleri ayrıca işaretlenir.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · RANDEVU DEFTERİ. The 14:00 row arrives mid-act, with its source. -->
+  <section id="act-randevu" data-sc-act="pin" data-sc-span="2.2" aria-labelledby="h-randevu">
+    <div data-sc-stage>
+      <div class="k-frame k-frame--center">
+        <section class="k-panel k-book" aria-labelledby="h-randevu">
+          <div class="k-panel__bar">
+            <h2 id="h-randevu">Randevu defteri · Perşembe</h2>
+            <span class="k-meta">yükleniyor</span>
+          </div>
+          <div class="k-panel__body"></div>
+          <p class="k-panel__foot" data-sc-cue="0.26 1 0.12 0">
+            14:00 satırı bu sayfada oluşturuldu. Kaynağı satırın yanında duruyor.
+          </p>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · OTOMASYON. Ends on the authored silence before the peak. -->
+  <section id="act-otomasyon" data-sc-act="flow" class="sc-section k-after-pin" aria-labelledby="h-otomasyon">
+    <div class="k-band">
+      <div data-sc-in data-sc-stagger="60">
+        <h2 class="k-h" id="h-otomasyon">Bugün altı akış çalıştı.</h2>
+        <p class="k-sub">Hatırlatma, kurtarma, takip, iç bildirim, boş slot doldurma ve gün sonu özeti. Her akış bir tetik, bir koşul ve bir eylemden oluşur.</p>
+      </div>
+      <div class="k-flows" data-sc-in data-sc-stagger="45"></div>
+      <p class="k-quiet">Bunların hiçbirini bugün kimse başlatmadı.</p>
+    </div>
+  </section>
+
+  <!-- 5 · PANEL. The peak: the largest span on the page. -->
+  <section id="act-panel" data-sc-act="pin" data-sc-span="3.4" aria-labelledby="h-panel">
+    <div data-sc-stage>
+      <div class="k-frame">
+        <div class="k-panelgrid">
+
+          <div class="k-panelhead" data-sc-cue="0 1 0 0">
+            <h2 class="k-h" id="h-panel">Gün sonu paneli</h2>
+            <p class="k-sub">Aşağıdaki sayılar, bu sayfada az önce izlediğiniz günden hesaplandı. Kimse toplamadı.</p>
+          </div>
+
+          <dl class="k-figs">
+            <div class="k-fig">
+              <dt>Bugün planlanan</dt>
+              <dd><span id="fig-planned" class="sc-nums" data-sc-count-at="0.05 0.3">0</span>
+                  <small id="fig-planned-note"></small></dd>
+            </div>
+            <div class="k-fig">
+              <dt>Gelen</dt>
+              <dd><span id="fig-arrived" class="sc-nums" data-sc-count-at="0.08 0.33">0</span>
+                  <small id="fig-arrived-note"></small></dd>
+            </div>
+            <div class="k-fig k-fig--flag">
+              <dt>Gelmeyen</dt>
+              <dd><span id="fig-missed" class="sc-nums" data-sc-count-at="0.11 0.36">0</span>
+                  <small id="fig-missed-note"></small></dd>
+            </div>
+            <div class="k-fig">
+              <dt>Asistan yanıtı</dt>
+              <dd><span id="fig-replies" class="sc-nums" data-sc-count-at="0.14 0.4">0</span>
+                  <small id="fig-replies-note"></small></dd>
+            </div>
+          </dl>
+
+          <section class="k-panel k-alerts" aria-labelledby="h-uyari">
+            <div class="k-panel__bar">
+              <h3 id="h-uyari">Operasyon uyarıları</h3>
+              <span class="k-meta">bugün</span>
+            </div>
+            <div class="k-panel__body"></div>
+          </section>
+
+          <section class="k-panel k-summary" aria-labelledby="h-ozet">
+            <div class="k-panel__bar">
+              <h3 id="h-ozet">Günlük özet</h3>
+              <span class="k-meta">17:15'te üretilir</span>
+            </div>
+            <div class="k-panel__body">
+              <p class="k-empty">Gün sonu raporu 17:15'te üretilir. Randevu, mesaj ve akış kayıtlarından hesaplanır.</p>
+              <ul></ul>
+            </div>
+            <p class="k-panel__foot">Demo verisinden hesaplandı. Klinik dışına hiçbir sayı gönderilmez.</p>
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · GÜVENLİK. A settings surface, not a claims list. -->
+  <section id="act-guvenlik" data-sc-act="flow" class="sc-section k-after-pin" aria-labelledby="h-guvenlik">
+    <div class="k-band">
+      <div data-sc-in data-sc-stagger="60">
+        <h2 class="k-h" id="h-guvenlik">Yetkiler açıkça tanımlıdır.</h2>
+        <p class="k-sub">Bir rol seçin, o rolün neye erişebildiğini görün. AI asistanın yetkisi resepsiyondan geniş değildir.</p>
+      </div>
+
+      <div class="k-roles">
+        <div class="k-rolelist" role="group" aria-label="Rol seçimi"></div>
+        <div>
+          <div class="k-perm"></div>
+          <p class="k-meta k-rolenote" id="role-note" aria-live="polite"></p>
+        </div>
+      </div>
+
+      <div class="k-specs"></div>
+    </div>
+  </section>
+
+  <!-- 7 · KURULUM. The close is an actual input, and the footer is inside the
+       stage so the page has no dead tail after it. -->
+  <section id="act-kurulum" data-sc-act="pin" data-sc-span="1.4"
+           data-sc-verify-hold="true" aria-labelledby="h-kurulum">
+    <div data-sc-stage>
+      <div class="k-frame">
+        <div class="k-close" data-sc-cue="0 1 0 0">
+          <div>
+            <h2 class="k-h" id="h-kurulum">Kurulum tek oturumda tamamlanır.</h2>
+            <p class="k-sub">Klinik adı, hekim sayısı ve kanallar. Takvimi, rolleri ve akışları sistem kendi kurar. Aşağıdaki alanlar çalışır durumda.</p>
+            <p class="k-out"></p>
+          </div>
+
+          <form class="k-form" novalidate>
+            <div class="k-field">
+              <label for="f-name">Klinik adı</label>
+              <input id="f-name" type="text" autocomplete="organization" placeholder="Meridyen Polikliniği">
+              <small>Takvimde, hasta mesajlarında ve raporda bu ad görünür.</small>
+            </div>
+            <div class="k-field">
+              <label for="f-doctors">Hekim sayısı</label>
+              <input id="f-doctors" type="number" min="1" max="40" step="1" value="3" inputmode="numeric">
+            </div>
+            <fieldset class="k-field k-fieldset">
+              <legend>Kanallar</legend>
+              <div class="k-checks">
+                <label><input type="checkbox" name="kanal" value="WhatsApp" checked> WhatsApp</label>
+                <label><input type="checkbox" name="kanal" value="SMS" checked> SMS</label>
+                <label><input type="checkbox" name="kanal" value="e-posta"> e-posta</label>
+              </div>
+            </fieldset>
+            <button class="k-btn" type="submit">Kurulumu başlat</button>
+          </form>
+        </div>
+
+        <footer class="k-foot">
+          <span>Klinik.OS</span>
+          <span>Bu sayfadaki klinik, hastalar ve gün demo verisidir.</span>
+          <span><a href="#act-guvenlik">Veri ve güvenlik notları</a></span>
+          <span>Gizlilik ve KVKK metinleri yayın öncesinde eklenir.</span>
+        </footer>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
